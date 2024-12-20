@@ -1,0 +1,27 @@
+---
+import LinkedinIcon from "./icons/Linkedin.astro";
+import GithubIcon from "./icons/Github.astro";
+import SocialPill from "./SocialPill.astro";
+---
+
+<header class="text-center py-40">
+  <h1 class="text-6xl font-bold">Aprendizaje en acción</h1>
+  <p class="text-lg mt-4 max-w-2xl mx-auto">
+    "¡Un viaje de 100 proyectos para convertirme en un desarrollador web más
+    completo! A través de este desafío, me propongo dominar los fundamentos de
+    JavaScript y expandir mis conocimientos. Cada proyecto será un paso más
+    hacia mi objetivo de convertirme en un desarrollador web versátil y
+    confiable.
+  </p>
+  <h2 class="text-2xl text-yellow-200">Jinson Medina</h2>
+  <nav class="flex gap-4 mt-8 flex-wrap text-center justify-center">
+    <SocialPill href="https://www.linkedin.com/in/jinson-medina/">
+      <LinkedinIcon class="size-6" />
+      LinkedIn
+    </SocialPill>
+    <SocialPill href="https://github.com/Jinson25">
+      <GithubIcon class="size-6" />
+      GitHub
+    </SocialPill>
+  </nav>
+</header>
