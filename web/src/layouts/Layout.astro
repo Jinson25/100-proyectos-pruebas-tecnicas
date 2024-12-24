@@ -1,5 +1,5 @@
 ---
-import '@fontsource/kalam';
+import "@fontsource/kalam";
 ---
 
 <!doctype html>
@@ -11,9 +11,11 @@ import '@fontsource/kalam';
     <meta name="generator" content={Astro.generator} />
     <title>Aprendizaje en acción: proyectos o pruebas tecnicas</title>
   </head>
-  <body>
+  <body class="relative">
     <div
-      class="absolute inset-0 -z-10 items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"
+      class="fixed top-0 left-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950
+  bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
+  dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
     >
     </div>
     <slot />
@@ -22,8 +24,15 @@ import '@fontsource/kalam';
     :root {
       color-scheme: light dark;
     }
-	body {
-		font-family: 'Kalam', cursive;
-	}
+    html {
+      scroll-behavior: smooth;
+      font-family: "Kalam", cursive;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overscroll-behavior: none;
+    }
   </style>
 </html>
