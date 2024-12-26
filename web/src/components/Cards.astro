@@ -1,7 +1,12 @@
 ---
 import SocialPill from "./SocialPill.astro";
 import { PROJECTS, TAGS } from "../constates.js";
+import GithubIcon from "./icons/Github.astro";
+import WorldIcon from "./icons/World.astro";
+import LinkButton from "./LinkButton.astro";
+import Linkedin from "./icons/Linkedin.astro";
 ---
+
 <div
   class="grid gap-8 mb-6 lg:mb-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"
 >
@@ -36,14 +41,19 @@ import { PROJECTS, TAGS } from "../constates.js";
         <div class="space-y-4">
           <h2 class="text-2xl text-yellow-400 font-bold">{project.title}</h2>
           <p class="text-lg">{project.description}</p>
-          <nav class="flex gap-2 flex-wrap justify-center">
-            {TAGS.map((tag) => (
-              <SocialPill href={tag.link} class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}>{tag.title}</SocialPill>
-            ))}
+          <nav class="flex gap-2 flex-wrap justify-center py-1">
+            <LinkButton href={project.Github}>
+              <GithubIcon class="size-6" />
+              GitHub
+            </LinkButton>
+            <LinkButton href={project.demon}>
+              <WorldIcon class="size-6" />
+              Demo
+            </LinkButton>
           </nav>
         </div>
         <img
-          class="w-full rounded-lg overflow-hidden object-cover aspect-video"
+          class="w-full rounded-lg overflow-hidden object-cover aspect-video "
           src={project.image}
           alt={project.title}
         />
