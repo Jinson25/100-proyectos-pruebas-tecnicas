@@ -1,6 +1,3 @@
-import { preview } from "astro";
-import Github from "./components/icons/Github.astro";
-
 export const TAGS = [
     {
         title: "Github",
@@ -19,7 +16,7 @@ export const PROJECTS = [
         tangs: TAGS,
         image:
             "https://codewithfaraz.com/img/how%20to%20create%20a%20ping%20pong%20game%20with%20html,%20css%20and%20javascript.jpg",
-        Github: "https://github.com",
-        demon: "https://pong-game-2d.netlify.app/",
+        Github: "https://github.com/Jinson25",
+        demon: "../01-pong-2D/index.html",
     },
 ];

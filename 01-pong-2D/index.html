@@ -1,11 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PONG EN 2D</title>
 </head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background-color: #000;
+        color: #e3fd00;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    main {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 3em;
+        top: 0;
+    }
+
+    .container {
+        display: flex;
+        position: relative;
+        margin: 12px auto;
+        height: 75vh;
+        width: 90vw;
+        max-width: 1200px;
+        justify-content: center;
+        align-items: center;
+        border: 5px solid white;
+    }
+
+
+    .raqueta {
+        width: 10px;
+        height: 100px;
+        background-color: white;
+        position: absolute;
+    }
+
+    .raqueta_Izquierda {
+        left: 15px;
+    }
+
+    .raqueta_Derecha {
+        right: 15px;
+    }
+
+    .red {
+        width: 2px;
+        min-height: 75vh;
+        background-color: white;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #pelota {
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+    }
+
+    #puntuacion {
+        font-size: 2em;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #f0f0f0;
+    }
+
+    #puntuacion span {
+        margin: 0 10px;
+    }
+
+    .play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 2.5em;
+        background-color: #e3fd00;
+        color: #000;
+        border: none;
+        cursor: pointer;
+        border-radius: 0%;
+    }
+</style>
+
+
 <body>
-    
+    <main>
+        <h1>PONG EN 2D</h1>
+        <div class="container">
+            <div class="raqueta raqueta_Izquierda"></div>
+            <div class="red"></div>
+            <div id="pelota"></div>
+            <div id="puntuacion">
+                <span id="puntos_izquierda">0</span>
+                <span id="puntos_derecha">0</span>
+            </div>
+            <div class="raqueta raqueta_Derecha"></div>
+        </div>
+        <div class="play">
+            <button id="start">Jugar</button>
+        </div>
+    </main>
 </body>
+
+<script>
+    const button = document.getElementById('start');
+    const play = document.querySelector('.play');
+
+    function startGame() {
+        play.style.display = 'none';
+
+        const pelota = document.getElementById('pelota');
+        const raqueta_Izquierda = document.querySelector('.raqueta_Izquierda');
+        const raqueta_Derecha = document.querySelector('.raqueta_Derecha');
+        const puntuacion = document.getElementById('puntuacion');
+        const campo = document.querySelector('.container');
+
+        let puntos_izquierda = 0;
+        let puntos_derecha = 0;
+
+        let velocidadX = 3;
+        let velocidadY = 3;
+
+        let posicionX = campo.clientWidth / 2;
+        let posicionY = campo.clientHeight / 2;
+
+        let raqueta_Izquierda_posicion = (campo.clientHeight - raqueta_Izquierda.clientHeight) / 2;
+        let raqueta_Derecha_posicion = (campo.clientHeight - raqueta_Derecha.clientHeight) / 2;
+
+        // Actualizar posición inicial de las raquetas
+        raqueta_Izquierda.style.top = raqueta_Izquierda_posicion + 'px';
+        raqueta_Derecha.style.top = raqueta_Derecha_posicion + 'px';
+
+        const velocidadRaqueta = 10;
+
+        // Evento para mover raquetas
+        document.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'w':
+                    raqueta_Izquierda_posicion = Math.max(0, raqueta_Izquierda_posicion - velocidadRaqueta);
+                    break;
+                case 's':
+                    raqueta_Izquierda_posicion = Math.min(campo.clientHeight - raqueta_Izquierda.clientHeight, raqueta_Izquierda_posicion + velocidadRaqueta);
+                    break;
+                case 'ArrowUp':
+                    raqueta_Derecha_posicion = Math.max(0, raqueta_Derecha_posicion - velocidadRaqueta);
+                    break;
+                case 'ArrowDown':
+                    raqueta_Derecha_posicion = Math.min(campo.clientHeight - raqueta_Derecha.clientHeight, raqueta_Derecha_posicion + velocidadRaqueta);
+                    break;
+            }
+
+            raqueta_Izquierda.style.top = raqueta_Izquierda_posicion + 'px';
+            raqueta_Derecha.style.top = raqueta_Derecha_posicion + 'px';
+        });
+
+        let juego = setInterval(() => {
+            // Actualizar la posición de la pelota
+            pelota.style.left = posicionX + 'px';
+            pelota.style.top = posicionY + 'px';
+
+            posicionX += velocidadX;
+            posicionY += velocidadY;
+
+            // Rebotar en los bordes superior e inferior del container
+            if (posicionY <= 0 ||
+                posicionY >= campo.clientHeight - pelota.clientHeight) {
+                velocidadY = -velocidadY;
+            }
+
+
+            // Rebotar en la raqueta izquierda
+            if (posicionX <= raqueta_Izquierda.clientWidth + 15 &&
+                posicionY + pelota.clientHeight >= raqueta_Izquierda_posicion &&
+                posicionY <= raqueta_Izquierda_posicion + raqueta_Izquierda.clientHeight) {
+                velocidadX = -velocidadX;
+            }
+
+            // Rebotar en la raqueta derecha
+            if (posicionX >= campo.clientWidth - raqueta_Derecha.clientWidth - pelota.clientWidth - 15 &&
+                posicionY + pelota.clientHeight >= raqueta_Derecha_posicion &&
+                posicionY <= raqueta_Derecha_posicion + raqueta_Derecha.clientHeight) {
+                velocidadX = -velocidadX;
+            }
+
+
+            // Si la pelota sale por el lado izquierdo
+            if (posicionX <= 0) {
+                puntos_derecha++;
+                puntuacion.innerHTML = `<span id="puntos_izquierda">${puntos_izquierda}</span><span id="puntos_derecha">${puntos_derecha}</span>`;
+                posicionX = campo.clientWidth / 2;
+                posicionY = campo.clientHeight / 2;
+                velocidadX = 5;
+                velocidadY = 5;
+            }
+
+            // Si la pelota sale por el lado derecho
+            if (posicionX >= campo.clientWidth - pelota.clientWidth) {
+                puntos_izquierda++;
+                puntuacion.innerHTML = `<span id="puntos_izquierda">${puntos_izquierda}</span><span id="puntos_derecha">${puntos_derecha}</span>`;
+                posicionX = campo.clientWidth / 2;
+                posicionY = campo.clientHeight / 2;
+                velocidadX = -5;
+                velocidadY = 5;
+            }
+
+            // Finalizar el juego si algún jugador alcanza 10 puntos
+            if (puntos_izquierda === 10 || puntos_derecha === 10) {
+                clearInterval(juego);
+                play.style.display = 'block';
+                play.innerHTML = '<button id="start">Jugar de nuevo</button>';
+                button.addEventListener('click', startGame);
+            }
+        }, 1000 / 60);
+    }
+
+    play.addEventListener('click', startGame);
+</script>
+
+
 </html>
