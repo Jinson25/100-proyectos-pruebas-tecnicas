@@ -1,3 +1,5 @@
+import Github from "./components/icons/Github.astro";
+
 export const TAGS = [
     {
         title: "Github",
@@ -15,8 +17,8 @@ export const PROJECTS = [
             "Este proyecto incluye dos paletas controladas por el jugador, una bola que rebota en las paredes y las paletas, y un sistema de puntuación. Lógica de colisiones en JavaScript.",
         tangs: TAGS,
         image:
-            "https://codewithfaraz.com/img/how%20to%20create%20a%20ping%20pong%20game%20with%20html,%20css%20and%20javascript.jpg",
-        Github: "https://github.com/Jinson25",
-        demon: "../01-pong-2D/index.html",
+            "projects/01-pong-2D/pong.webp",
+        demon: "projects/01-pong-2D/index.html",
+        Github: "https://github.com/Jinson25/100-proyectos-pruebas-tecnicas/tree/main/01-pong-2D"
     },
 ];
