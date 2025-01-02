@@ -1,4 +1,7 @@
-<a {...Astro.props}
+<a
+  {...Astro.props}
+  target="_blank"
+  rel="noopener noreferrer"
   class="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
 >
   <span
@@ -7,6 +10,6 @@
   <span
     class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-gray-950 px-8 py-1 text-sm font-medium text-gray-50 backdrop-blur-3xl"
   >
-    <slot/>
+    <slot />
   </span>
 </a>
