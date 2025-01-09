@@ -32,8 +32,8 @@ Un juego clásico implementado con JavaScript.
   - Sistema de puntuación.
   - Controles para dos jugadores.
 
-- **Demo:** [Enlace a la demo](#)  
-- **Código fuente:** [Repositorio en GitHub](https://github.com/Jinson25/100-proyectos-pruebas-tecnicas)
+- **Demo:** [Enlace a la demo](https://100-proyectos-pruebas-tecnicas.vercel.app/projects/01-pong-2D/index.html)
+- **Código fuente:** [Repositorio en GitHub](https://github.com/Jinson25/100-proyectos-pruebas-tecnicas/tree/main/01-pong-2D)
 
 ---
 
